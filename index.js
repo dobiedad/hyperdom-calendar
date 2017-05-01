@@ -35,6 +35,9 @@ var calendarForToday = {
     month: function () {
       return this.date.getMonth()
     },
+    firstOfMonthDay:function () {
+      return new Date(this.year(), this.month(), 1).getDay() - 1
+    },
     nextMonth: function () {
       this.date = new Date(this.year(), this.month()+1, 1)
       return this.month
@@ -96,6 +99,9 @@ function listOfDaysForMonth(model) {
   var self = this
   var arrayOfDays = arrayFromOneToN(daysInMonth(model.calendar.selected.month(),model.calendar.selected.year()))
   return h("ul.days",
+    arrayFromOneToN(model.calendar.selected.firstOfMonthDay()).map(function (weekday) {
+      return h("li", '')
+    }),
     arrayOfDays.map(function (day) {
       return h("li",{class:model.calendar.selected.day() == day ? 'active' : '',onclick:function () {
         model.calendar.selected.setDay(day)
