@@ -1,5 +1,7 @@
 # Hyperdom Calendar
 A simple calender for [Hyperdom](https://github.com/featurist/hyperdom)
+
+![alt text](https://cloud.githubusercontent.com/assets/6469970/25592200/cd4676f4-2eaf-11e7-913d-76cd0b3cb679.png)
 ## Install
 
 ### npm
