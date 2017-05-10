@@ -9,32 +9,32 @@ A simple calender for [Hyperdom](https://github.com/featurist/hyperdom)
 ### Usage
 Make sure you add `calendar.min.css` to your styles.
 ```JavaScript
-var hyperdom = require('hyperdom')
-var h = hyperdom.html
+var h = require('hyperdom').html
 var calendar = require('hyperdom-calendar')
 
 function render(model) {
-  return calendar(model)
+  model.contactCalendar = {}
+  return calendar(contactCalendar)
 }
 ```
 ### API
-a [Hyperdom](https://github.com/featurist/hyperdom) model is required for this component to work. The component will bind these properties to `model.calendar`
+a [Hyperdom](https://github.com/featurist/hyperdom) model object is required for this component to work. The component will bind these properties to `model.chosenObject`
 ```JavaScript
 // returns todays date as date object
-model.calendar.today
+model.chosenObject.today
 // returns selected date as date object , initially set to todays date
-model.calendar.selected.date
+model.chosenObject.selected.date
 // returns selected month as a digit
-model.calendar.selected.month()
+model.chosenObject.selected.month()
 // returns next month from selected month as a digit
-model.calendar.selected.nextMonth()
+model.chosenObject.selected.nextMonth()
 // returns prev month from selected month as a digit
-model.calendar.selected.prevMonth()
+model.chosenObject.selected.prevMonth()
 // set day for current month current month, returns date object for that day
-model.calendar.selected.setDay(day)
+model.chosenObject.selected.setDay(day)
 // returns month as a string
-model.calendar.selected.monthString()
+model.chosenObject.selected.monthString()
 // returns day for selected date
-model.calendar.selected.day()
+model.chosenObject.selected.day()
 // returns year for selected date
-model.calendar.selected.year()
+model.chosenObject.selected.year()

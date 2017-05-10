@@ -62,32 +62,32 @@ var calendarForToday = {
   }
 }
 
-function HyperdomCalendar(model) {
-  if(!model.calendar){
-    model.calendar = calendarForToday
+function HyperdomCalendar(calendarModel) {
+  if(!calendarModel.selected){
+    calendarModel = calendarForToday
   }
-  return renderCalendar(model)
+  return renderCalendar(calendarModel)
 }
 
-function renderCalendar(model) {
+function renderCalendar(calendarModel) {
   return h("div.animated.fadeIn",
     h("div.month",
       h("ul",
         h("li.prev",{ onclick:function () {
-          model.calendar.selected.prevMonth()
+          calendarModel.selected.prevMonth()
         }}, "❮"),
         h("li.next",{ onclick:function () {
-          model.calendar.selected.nextMonth()
+          calendarModel.selected.nextMonth()
         }}, "❯"),
-        h("li",model.calendar.selected.monthString(),
+        h("li",calendarModel.selected.monthString(),
           h("br"),
-          h("span", {"style":{"font-size":"18px"}},  model.calendar.selected.year())))),
-      listDaysOfWeek(model),
-      listOfDaysForMonth(model)
+          h("span", {"style":{"font-size":"18px"}},  calendarModel.selected.year())))),
+      listDaysOfWeek(calendarModel),
+      listOfDaysForMonth(calendarModel)
     )
 }
 
-function listDaysOfWeek(model) {
+function listDaysOfWeek(calendarModel) {
   return h("ul.weekdays",
     daysOfWeek.map(function (weekday) {
       return h("li", weekday)
@@ -95,16 +95,16 @@ function listDaysOfWeek(model) {
   )
 }
 
-function listOfDaysForMonth(model) {
+function listOfDaysForMonth(calendarModel) {
   var self = this
-  var arrayOfDays = arrayFromOneToN(daysInMonth(model.calendar.selected.month(),model.calendar.selected.year()))
+  var arrayOfDays = arrayFromOneToN(daysInMonth(calendarModel.selected.month(),calendarModel.selected.year()))
   return h("ul.days",
-    arrayFromOneToN(model.calendar.selected.firstOfMonthDay()).map(function (weekday) {
+    arrayFromOneToN(calendarModel.selected.firstOfMonthDay()).map(function (weekday) {
       return h("li", '')
     }),
     arrayOfDays.map(function (day) {
-      return h("li",{class:model.calendar.selected.day() == day ? 'active' : '',onclick:function () {
-        model.calendar.selected.setDay(day)
+      return h("li",{class:calendarModel.selected.day() == day ? 'active' : '',onclick:function () {
+        calendarModel.selected.setDay(day)
       }}, day)
     })
   )
