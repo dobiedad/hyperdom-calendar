@@ -1,20 +1,6 @@
 var hyperdom = require('hyperdom')
 var h = hyperdom.html
-
-var months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-]
+var Calendar = require('./calendar');
 
 var daysOfWeek = [
   'Mo',
@@ -26,45 +12,9 @@ var daysOfWeek = [
   'Su'
 ]
 
-var today = new Date();
-
-var calendarForToday = {
-  today:today,
-  selected: {
-    date: today,
-    month: function () {
-      return this.date.getMonth()
-    },
-    firstOfMonthDay:function () {
-      return new Date(this.year(), this.month(), 1).getDay() - 1
-    },
-    nextMonth: function () {
-      this.date = new Date(this.year(), this.month()+1, 1)
-      return this.month()
-    },
-    prevMonth: function () {
-      this.date = new Date(this.year(), this.month()-1, 1)
-      return this.month()
-    },
-    setDay: function (day) {
-      this.date = new Date(this.year(), this.month(), day)
-      return this.day()
-    },
-    monthString: function () {
-      return months[this.date.getMonth()]
-    },
-    day: function () {
-      return this.date.getDate()
-    },
-    year: function () {
-      return this.date.getFullYear()
-    }
-  }
-}
-
 function HyperdomCalendar(calendarModel) {
   if(!calendarModel.selected){
-    calendarModel = calendarForToday
+    Object.assign(calendarModel,new Calendar())
   }
   return renderCalendar(calendarModel)
 }
