@@ -40,11 +40,11 @@ var calendarForToday = {
     },
     nextMonth: function () {
       this.date = new Date(this.year(), this.month()+1, 1)
-      return this.month
+      return this.month()
     },
     prevMonth: function () {
       this.date = new Date(this.year(), this.month()-1, 1)
-      return this.month
+      return this.month()
     },
     setDay: function (day) {
       this.date = new Date(this.year(), this.month(), day)
